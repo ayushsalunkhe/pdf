@@ -116,7 +116,7 @@ if pdf_file:
         
         # Display extracted text
         st.markdown("""
-        <div style='background-color: #f5f5f7; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;'>
+        <div style='background-color:rgb(38, 39, 48); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;'>
         <h3>Extracted Text</h3>
         </div>
         """, unsafe_allow_html=True)
@@ -130,7 +130,7 @@ if pdf_file:
                 try:
                     summary = get_summary(text_data_f)
                     st.markdown("""
-                    <div style='background-color: #f5f5f7; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;'>
+                    <div style='background-color: rgb(38, 39, 48); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;'>
                     <h3>Summary</h3>
                     </div>
                     """, unsafe_allow_html=True)
