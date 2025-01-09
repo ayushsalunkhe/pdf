@@ -2,4 +2,8 @@ streamlit
 pdfminer==20191125
 pdf2image
 pytesseract
-
+transformers
+langchain
+faiss-cpu
+Pillow
+torch
