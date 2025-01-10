@@ -49,18 +49,12 @@ with st.sidebar:
     
     st.markdown(html_temp.format("rgba(55, 53, 47, 0.16)"),unsafe_allow_html=True)
     st.markdown("""
-    # How does it work?
-    Simply load your PDF and convert it to single-page or multi-page text.
     """)
     st.markdown(html_temp.format("rgba(55, 53, 47, 0.16)"),unsafe_allow_html=True)
     st.markdown("""
-    Made by [@nainia_ayoub](https://twitter.com/nainia_ayoub) 
     """)
     st.markdown(
         """
-        <a href="https://www.buymeacoffee.com/nainiayoub" target="_blank">
-        <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
-        </a>
         """,
         unsafe_allow_html=True,
     )
