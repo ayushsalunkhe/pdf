@@ -163,7 +163,7 @@ pdf-text-extractor/
 You can help support the project through:
 - Providing feedback and reporting issues
 - Contributing to the code
-- [Buy me a coffee](https://www.buymeacoffee.com/nainiayoub)
+- [Buy me a coffee](https://www.buymeacoffee.com/ayush05)
 
 ## License
 This project is licensed under the MIT License.
