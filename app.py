@@ -1,10 +1,19 @@
 import streamlit as st
+import os
 import pdf2image
 from PIL import Image
 import pytesseract
 from pytesseract import Output, TesseractError
-from functions import convert_pdf_to_txt_pages, convert_pdf_to_txt_file, save_pages, displayPDF, images_to_txt
 from transformers import pipeline
+from functions import (
+    convert_pdf_to_txt_pages, 
+    convert_pdf_to_txt_file, 
+    save_pages, 
+    displayPDF, 
+    images_to_txt,
+    process_pdf_for_chat,
+    get_conversation_response
+)
 
 st.set_page_config(page_title="PDF to Text")
 
@@ -40,17 +49,26 @@ with st.sidebar:
     
     st.markdown(html_temp.format("rgba(55, 53, 47, 0.16)"),unsafe_allow_html=True)
     st.markdown("""
+    # How does it work?
+    Simply load your PDF and convert it to single-page or multi-page text.
     """)
     st.markdown(html_temp.format("rgba(55, 53, 47, 0.16)"),unsafe_allow_html=True)
     st.markdown("""
-
+    Made by [@nainia_ayoub](https://twitter.com/nainia_ayoub) 
     """)
     st.markdown(
         """
+        <a href="https://www.buymeacoffee.com/nainiayoub" target="_blank">
+        <img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174">
+        </a>
         """,
         unsafe_allow_html=True,
     )
     
+    # Replace OpenAI API key input with Groq
+    api_key = st.text_input("Enter Groq API key:", type="password")
+    if api_key:
+        os.environ["GROQ_API_KEY"] = api_key
 
 pdf_file = st.file_uploader("Load your PDF", type=['pdf', 'png', 'jpg'])
 hide="""
@@ -111,7 +129,7 @@ if pdf_file:
         
         # Display extracted text
         st.markdown("""
-        <div style='background-color:rgb(38, 39, 48); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;'>
+        <div style='background-color: #f5f5f7; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;'>
         <h3>Extracted Text</h3>
         </div>
         """, unsafe_allow_html=True)
@@ -125,7 +143,7 @@ if pdf_file:
                 try:
                     summary = get_summary(text_data_f)
                     st.markdown("""
-                    <div style='background-color: rgb(38, 39, 48); padding: 1.5rem; border-radius: 12px; margin-top: 2rem;'>
+                    <div style='background-color: #f5f5f7; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;'>
                     <h3>Summary</h3>
                     </div>
                     """, unsafe_allow_html=True)
@@ -192,3 +210,31 @@ if pdf_file:
                     st.info(summary)
                 except Exception as e:
                     st.error("Error generating summary. Text might be too short or invalid.")
+
+if "extracted_text" not in st.session_state:
+    st.session_state.extracted_text = None
+if "conversation" not in st.session_state:
+    st.session_state.conversation = None
+
+if pdf_file is not None:
+    # Process the PDF file as before
+    # ...existing processing code...
+    
+    # Store the extracted text
+    st.session_state.extracted_text = text_data_f
+    
+    # Initialize the chatbot
+    if st.session_state.extracted_text and api_key:
+        st.session_state.conversation = process_pdf_for_chat(st.session_state.extracted_text)
+        
+        # Chat interface
+        st.subheader("Chat with your PDF")
+        user_question = st.text_input("Ask a question about your PDF:")
+        if user_question:
+            if st.session_state.conversation is not None:
+                response = get_conversation_response(st.session_state.conversation, user_question)
+                st.write("Answer:", response)
+            else:
+                st.warning("Please wait for the chatbot to initialize...")
+    elif not api_key:
+        st.warning("Please enter your OpenAI API key to use the chat feature.")
