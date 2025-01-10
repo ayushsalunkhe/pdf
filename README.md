@@ -1,14 +1,39 @@
-# PDF to Text Extractor
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/nainiayoub/pdf-text-data-extractor/main/app.py)
-![visitor badge](https://visitor-badge.glitch.me/badge?page_id=nainiayoub.pdf-text-data-extractor)
-![forks badge](https://img.shields.io/github/forks/nainiayoub/pdf-text-data-extractor)
-![starts badge](https://img.shields.io/github/stars/nainiayoub/pdf-text-data-extractor?style=social)
+# PDF Text Extractor & AI Assistant 🚀
+### By Ayush Salunkhe
 
-PDF text data extraction app that takes a PDF document as input and returns either a txt file that contains all pages or a compressed folder of txt files representing the document pages. OCR can also be enabled for scanned documents.
+[![Made with Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://streamlit.io)
+[![Python 3.7+](https://img.shields.io/badge/python-3.7+-blue.svg)](https://www.python.org/downloads/)
+[![MIT License](https://img.shields.io/badge/license-MIT-green.svg)](https://opensource.org/licenses/MIT)
 
-![pdf_text_image](https://user-images.githubusercontent.com/50157142/214037439-448fafb8-5363-46cb-849e-6132f9bc0fb2.PNG)
+A powerful PDF text extraction tool with AI capabilities for summarization and intelligent Q&A. Extract, analyze, and interact with your PDF documents effortlessly.
 
-## System Requirements & Installation
+## 🎯 Features
+
+- **Text Extraction**: Extract text from PDFs with high accuracy
+- **OCR Support**: Handle scanned documents with Tesseract OCR
+- **Multi-language Support**: Process documents in English, French, Arabic, and Spanish
+- **AI Summary**: Generate concise summaries using BART
+- **Smart Chat**: Interactive Q&A with documents using Groq's Mixtral-8x7B
+- **Export Options**: Download as single TXT or page-wise ZIP
+- **Document Preview**: Built-in PDF viewer
+
+## 🛠️ Technology Stack
+
+- **Frontend**: Streamlit
+- **AI/ML**: 
+  - Groq (Chat)
+  - BART (Summarization)
+  - Tesseract (OCR)
+- **Text Processing**: 
+  - PDFMiner
+  - pdf2image
+  - LangChain
+- **Vector Store**: FAISS
+- **Embeddings**: HuggingFace (all-MiniLM-L6-v2)
+
+## 🚀 Quick Start
+
+### Prerequisites
 
 ### 1. Python Installation
 1. Download Python 3.7+ from [Python.org](https://www.python.org/downloads/)
